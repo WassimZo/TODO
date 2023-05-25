@@ -1,0 +1,85 @@
+.main-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #f5eded;
+}
+
+.main-title {
+	width: 100vw;
+	height: 150px;
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 128px;
+	line-height: 150px;
+	text-align: center;
+
+	color: #000000;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	margin: 100px 33vw;
+}
+
+.login-form label,
+.lgoin-form span {
+	margin: 10px 0;
+}
+
+.login-form label {
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 38px;
+	display: flex;
+	align-items: flex-end;
+	color: #3e3636;
+}
+
+.login-form input {
+	box-sizing: border-box;
+	background: #ffffff;
+	border: 1px solid #000000;
+	border-radius: 20px;
+	line-height: 50px;
+	padding: 0 10px;
+	font-size: 32px;
+}
+
+.login-form span {
+	text-align: center;
+	margin-top: 20px;
+	font-family: "Roboto";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 38px;
+	color: #3e3636;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.login-form a {
+	text-decoration: none;
+	color: #000000;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.login-form button {
+	background: #000000;
+	border-radius: 50px;
+	color: #fff;
+	margin: 20px auto 0;
+	padding: 20px 20px;
+	font-family: "Roboto";
+	font-size: 28px;
+	text-align: center;
+	color: #f5eded;
+	width: 150px;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
