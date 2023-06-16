@@ -29,10 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-]
-
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
@@ -145,5 +141,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 
 
