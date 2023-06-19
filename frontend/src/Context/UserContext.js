@@ -22,7 +22,8 @@ export function UserContextProvider(props) {
 		client
 			.get("/user")
 			.then((res) => {
-				console.log(res);
+				console.log(res.data['user']['username'])
+				setUsername(res.data['user']['username'])
 				setCurrentUser(true);
 				navigate("/private/home");
 			})
