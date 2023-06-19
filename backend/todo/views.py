@@ -63,7 +63,6 @@ class TaskView(APIView):
         serializer = UserSerializer(request.user)
         user_id = User.objects.get(username=serializer.data['username'])
         queryset = Tasks.objects.filter(username=user_id)
-        print(queryset)
         result = {}
         if queryset:
            counter = 1

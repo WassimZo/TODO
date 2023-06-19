@@ -1,21 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../../Component/Navbar/Navbar";
 import Task from "../../Component/Navbar/Tasks/Task";
+import { UserContext } from "../../Context/UserContext";
 import "./Home.css";
 
 export default function Home() {
 	const [addTaskForm, setAddTaskForm] = useState(false);
+	const {loadTasks, tasks} = useContext(UserContext)
 
 	const handleAddTask = () => {
 		setAddTaskForm(true);
 	};
+	
+	
+
+	useEffect(() => {
+		loadTasks().catch(console.error)
+	}, [loadTasks]);
 
 	return (
 		<div className="main">
 			<Navbar />
 			<div className="task-container">
 				<h1>Tasks</h1>
-				<Task description="miwmiw" />
+				{!tasks.includes("no tasks found") && tasks.map(task => (<Task key={task.id} description={task.description}/>))}
 				{!addTaskForm ? (
 					<button className="add-btn" onClick={handleAddTask}>
 						+

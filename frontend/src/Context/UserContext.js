@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, createContext } from "react";
+import { useContext, useState, useEffect, createContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -16,13 +16,13 @@ export const UserContext = createContext();
 export function UserContextProvider(props) {
 	const [currentUser, setCurrentUser] = useState();
 	const [username, setUsername] = useState();
+	const [tasks, setTasks] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		client
 			.get("/user")
 			.then((res) => {
-				console.log(res.data['user']['username'])
 				setUsername(res.data['user']['username'])
 				setCurrentUser(true);
 				navigate("/private/home");
@@ -72,9 +72,15 @@ export function UserContextProvider(props) {
 		});
 	};
 
+	const loadTasks = useCallback(async () => {
+		client.get("/tasks").then((res) => {
+		   setTasks(Object.values(res.data));
+	   }).catch((err) => {})
+   }, [])
+
 	return (
 		<UserContext.Provider
-			value={{ signUp, currentUser, signIn, logout, username }}
+			value={{ signUp, currentUser, signIn, logout, username, loadTasks, tasks }}
 		>
 			{props.children}
 		</UserContext.Provider>
