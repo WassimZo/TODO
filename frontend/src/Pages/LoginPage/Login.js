@@ -1,6 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../Context/UserContext";
-import CSRFToken from "../../Component/CSRFToken";
 import "./Login.css";
 
 export default function Login() {
@@ -42,7 +41,6 @@ export default function Login() {
 					handleLogin(e);
 				}}
 			>
-				<CSRFToken />
 				<label htmlFor="username">Username :</label>
 				<input type="text" id="username" name="username" ref={addinputs} />
 				<label htmlFor="pwd">Password :</label>

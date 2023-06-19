@@ -1,16 +1,14 @@
 import { useContext, useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.withCredentials = true;
 
 const client = axios.create({
 	baseURL: `${process.env.REACT_APP_API_URL}/api`,
-	headers: {
-		"Accept": "application/json",
-		"content-Type": "application/json",
-		"X-CSRFToken": Cookies.get("csrftoken"),
-	},
 });
 
 export const UserContext = createContext();
@@ -26,6 +24,7 @@ export function UserContextProvider(props) {
 			.then((res) => {
 				console.log(res);
 				setCurrentUser(true);
+				navigate("/private/home");
 			})
 			.catch((err) => {
 				setCurrentUser(false);

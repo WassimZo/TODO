@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
-import CSRFToken from "../../Component/CSRFToken";
 import "../LoginPage/Login.css";
 
 export default function Register() {
@@ -55,7 +54,6 @@ export default function Register() {
 				}}
 				ref={formRef}
 			>
-				<CSRFToken />
 				<label htmlFor="username">Username :</label>
 				<input type="text" id="username" name="username" ref={addinputs} />
 				<label htmlFor="pwd">Password :</label>

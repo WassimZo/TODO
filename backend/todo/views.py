@@ -7,22 +7,8 @@ from rest_framework import viewsets, permissions, status
 from .serializers import TaskSerializer, UserRegisterSerializer, UserLoginSerializer, UserSerializer
 from .validations import custom_validation, validate_password, validate_username
 from .models import Tasks
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
-from django.utils.decorators import method_decorator
 
 
-@method_decorator(csrf_protect, name='dispatch')
-class CheckAuthenticated(APIView):
-    def get(self, request, format=None):
-        isAuthenticated = User.is_authenticated
-
-        if isAuthenticated: 
-            return Response({ 'isAuthenticated': 'success'})
-        else: 
-            return Response({ 'isAuthenticated': 'error'})
-
-
-@method_decorator(csrf_protect, name='dispatch')
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -35,7 +21,7 @@ class UserRegister(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@method_decorator(csrf_protect, name='dispatch')
+
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)
@@ -52,17 +38,14 @@ class UserLogin(APIView):
 
 
 class UserLogout(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+
     def post(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)
     
-
-@method_decorator(ensure_csrf_cookie, name='dispatch')
-class getCSRFToken(APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        return Response({ 'success': 'CSRF cookie set'})
 
 class UserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
