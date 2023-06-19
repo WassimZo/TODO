@@ -69,7 +69,7 @@ export default function Register() {
 				/>
 				<span>{validation}</span>
 				<span>
-					Have an account ? <a href="/register">Login here</a>
+					Have an account ? <a href="/">Login here</a>
 				</span>
 				<button type="submit" className="login-btn">
 					Register

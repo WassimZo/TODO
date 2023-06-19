@@ -26,7 +26,6 @@ export default function Login() {
 			);
 			formRef.current.reset();
 			setValidation("");
-			console.log("logged in");
 		} catch (err) {
 			setValidation("password or username incorrect");
 		}

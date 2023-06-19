@@ -19,14 +19,14 @@ export default function CSRFToken() {
 				}
 			}
 		}
+		console.log(cookieValue);
 		return cookieValue;
 	};
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await axios.get("http://127.0.0.1:8000/api/csrf");
-				console.log(document.cookie);
+				await axios.get(`${process.env.REACT_APP_API_URL}/api/csrf`, {withCredentials: true});
 			} catch (err) {}
 		};
 
