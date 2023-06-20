@@ -24,3 +24,9 @@ def validate_password(data):
     if not password:
         raise ValidationError('a password is needed')
     return True
+
+def validate_task(data): 
+    description = data['description']
+    if not description:
+        raise ValidationError('A task description is needed')
+    return data

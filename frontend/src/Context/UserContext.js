@@ -71,6 +71,26 @@ export function UserContextProvider(props) {
 				setServerValidation("Username or password incorrect")
 			})
 	};
+
+	const addTask = (description) => {
+		client.post('/add_task', {
+			description: description,
+		}).then((res) => {
+			loadTasks();
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
+
+	const removeTask = (task_id) => {
+		client.post('/remove_task', {
+			id: task_id,
+		}).then((res) => {
+			loadTasks();
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
  
 	const logout = () => {
 		client.post("/logout").then((res) => {
@@ -87,7 +107,9 @@ export function UserContextProvider(props) {
 
 	return (
 		<UserContext.Provider
-			value={{ signUp, currentUser, signIn, logout, username, loadTasks, tasks, serverValidation }}
+			value={{ signUp, currentUser, signIn, logout,
+				 username, loadTasks, tasks, serverValidation,
+				  addTask, removeTask }}
 		>
 			{props.children}
 		</UserContext.Provider>

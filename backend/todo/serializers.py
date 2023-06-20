@@ -10,6 +10,11 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Tasks
         fields = ('description', 'done', 'id')
 
+    def create(self, clean_data):
+        task_obj = Tasks.objects.create(description=clean_data['description'], username=clean_data['user'])
+        task_obj.save()
+        return task_obj
+
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:

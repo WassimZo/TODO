@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions, status
 from .serializers import TaskSerializer, UserRegisterSerializer, UserLoginSerializer, UserSerializer
-from .validations import custom_validation, validate_password, validate_username
+from .validations import custom_validation, validate_password, validate_username, validate_task
 from .models import Tasks
 
 
@@ -74,3 +74,29 @@ class TaskView(APIView):
         else :
             return Response({'no tasks found'}, status=status.HTTP_200_OK)
 
+class addTask(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication, )
+
+    def post(self, request): 
+        clean_data = validate_task(request.data)
+        user = request.user
+        clean_data['user']= user
+        serializer = TaskSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            new_task = serializer.create(clean_data)
+            if new_task :
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class removeTask(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication, )
+
+    def post(self, request):
+        id = request.data['id']
+        user = request.user
+        delete_task = Tasks.objects.get(id=id, username=user).delete()
+        if delete_task:
+            return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
