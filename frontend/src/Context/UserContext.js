@@ -17,6 +17,7 @@ export function UserContextProvider(props) {
 	const [currentUser, setCurrentUser] = useState();
 	const [username, setUsername] = useState();
 	const [tasks, setTasks] = useState([]);
+	const [serverValidation, setServerValidation] = useState('');
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -48,7 +49,10 @@ export function UserContextProvider(props) {
 						setCurrentUser(true);
 						setUsername(username);
 						navigate("/private/home");
+						setServerValidation('');
 					});
+			}).catch((err) => {
+					setServerValidation("Username Already exists");
 			});
 	};
 
@@ -62,9 +66,12 @@ export function UserContextProvider(props) {
 				setCurrentUser(true);
 				setUsername(username);
 				navigate("/private/home");
-			});
+				setServerValidation('');
+			}).catch((err) => {
+				setServerValidation("Username or password incorrect")
+			})
 	};
-
+ 
 	const logout = () => {
 		client.post("/logout").then((res) => {
 			setCurrentUser(false);
@@ -80,7 +87,7 @@ export function UserContextProvider(props) {
 
 	return (
 		<UserContext.Provider
-			value={{ signUp, currentUser, signIn, logout, username, loadTasks, tasks }}
+			value={{ signUp, currentUser, signIn, logout, username, loadTasks, tasks, serverValidation }}
 		>
 			{props.children}
 		</UserContext.Provider>

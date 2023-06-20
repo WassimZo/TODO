@@ -4,7 +4,7 @@ import "../LoginPage/Login.css";
 
 export default function Register() {
 	const [validation, setValidation] = useState("");
-	const { signUp } = useContext(UserContext);
+	const { signUp, serverValidation } = useContext(UserContext);
 
 	const inputs = useRef([]);
 	const addinputs = (e) => {
@@ -36,11 +36,7 @@ export default function Register() {
 			);
 			formRef.current.reset();
 			setValidation("");
-		} catch (err) {
-			if (err.code === "ERR_BAD_REQUEST") {
-				setValidation("Username Already exists");
-			}
-		}
+		} catch (err) {}
 	};
 
 	return (
@@ -65,7 +61,7 @@ export default function Register() {
 					id="confirm-pwd"
 					ref={addinputs}
 				/>
-				<span>{validation}</span>
+				<span>{validation || serverValidation}</span>
 				<span>
 					Have an account ? <a href="/">Login here</a>
 				</span>

@@ -3,8 +3,7 @@ import { UserContext } from "../../Context/UserContext";
 import "./Login.css";
 
 export default function Login() {
-	const [validation, setValidation] = useState("");
-	const { signIn } = useContext(UserContext);
+	const { signIn, serverValidation } = useContext(UserContext);
 
 	const inputs = useRef([]);
 	const addinputs = (e) => {
@@ -24,10 +23,7 @@ export default function Login() {
 				inputs.current[1].value
 			);
 			formRef.current.reset();
-			setValidation("");
-		} catch (err) {
-			setValidation("password or username incorrect");
-		}
+		} catch (err) {}
 	};
 
 	return (
@@ -45,6 +41,7 @@ export default function Login() {
 				<input type="text" id="username" name="username" ref={addinputs} />
 				<label htmlFor="pwd">Password :</label>
 				<input type="password" name="pwd" id="pwd" ref={addinputs} />
+				<span>{serverValidation}</span>
 				<span>
 					Dont have account ? <a href="/register">Register here</a>
 				</span>
