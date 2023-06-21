@@ -29,7 +29,7 @@ export default function Task(props) {
 
   return (
     <div className='task'>
-      <span>{props.description}</span>
+      <span className={done ? "checked" : ""}>{props.description}</span>
       {done ? 
       <input type="checkbox" className='done' checked onChange={(e) => handleToggle(props.id)}/> :
       <input type="checkbox" className='done'  onChange={(e) => handleToggle(props.id)}/>

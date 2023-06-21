@@ -13,7 +13,7 @@
 
 .task-container {
 	background-color: #fff;
-	margin: 4em clamp(20px, 10vw, 200px) 0;
+	margin: 4em clamp(20px, 10vw, 200px);
 	padding-top: 1em;
 	border-radius: 20px;
 	text-align: center;

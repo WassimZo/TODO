@@ -2,28 +2,33 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	right: 0;
 	width: 100vw;
 	height: 100vh;
 	background: #f5eded;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
 }
 
 .main-title {
 	width: 100vw;
-	height: 150px;
+	height: 1.1em;
 	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 128px;
 	line-height: 150px;
 	text-align: center;
-
 	color: #000000;
+	margin-top: clamp(20px, 3vh, 100px);
+	margin-bottom: 0;
 }
 
 .login-form {
 	display: flex;
 	flex-direction: column;
-	margin: 100px 33vw;
+	margin: clamp(20px, 3vh, 40px) clamp(50px, 33vw, 300px) 0;
 }
 
 .login-form label,
@@ -35,8 +40,8 @@
 	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
-	font-size: 32px;
-	line-height: 38px;
+	font-size: clamp(20px, 3vh, 32px);
+	line-height: clamp(25px, 5vh, 38px);;
 	display: flex;
 	align-items: flex-end;
 	color: #3e3636;
@@ -47,7 +52,7 @@
 	background: #ffffff;
 	border: 1px solid #000000;
 	border-radius: 20px;
-	line-height: 50px;
+	line-height: clamp(30px, 7vh, 50px);
 	padding: 0 10px;
 	font-size: 32px;
 }
