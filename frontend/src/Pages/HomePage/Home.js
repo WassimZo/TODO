@@ -35,7 +35,7 @@ export default function Home() {
 			<Navbar />
 			<div className="task-container">
 				<h1>Tasks</h1>
-				{!tasks.includes("no tasks found") && tasks.map(task => (<Task key={task.id} id={task.id} description={task.description}/>))}
+				{!tasks.includes("no tasks found") && tasks.map(task => (<Task key={task.id} id={task.id} description={task.description} done={task.done}/>))}
 				{!addTaskForm ? (
 					<button className="add-btn" onClick={handleAddTaskButton}>
 						+
@@ -49,6 +49,7 @@ export default function Home() {
 							id="new-task"
 							placeholder="Add your task"
 							ref={inputRef}
+							autocomplete="off"
 						/>
 						<button type="submit" className="submit-task">
 							+

@@ -1,11 +1,12 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { UserContext } from '../../../Context/UserContext'
 import deleteIcon from './delete.svg'
 import './Task.css'
 
 export default function Task(props) {
 
-  const { removeTask } = useContext(UserContext)
+  const [done, setDone ] = useState(props.done)
+  const { removeTask, toggleTaskStatus } = useContext(UserContext)
 
   const handleDelete = async (id) => {
     try {
@@ -13,11 +14,27 @@ export default function Task(props) {
 		} catch(err) {}
   }
 
+  const handleToggle = async (id) => {
+    if(done) {
+      setDone(false)
+    }else {
+      setDone(true)
+    }
+    
+    try{
+      const status = await toggleTaskStatus(id);
+      console.log("request");
+    }catch(err) {}
+  }
 
   return (
     <div className='task'>
       <span>{props.description}</span>
-      <input type="checkbox" className='done'/>
+      {done ? 
+      <input type="checkbox" className='done' checked onChange={(e) => handleToggle(props.id)}/> :
+      <input type="checkbox" className='done'  onChange={(e) => handleToggle(props.id)}/>
+      }
+      
       <img src={deleteIcon} alt="delete-icon" onClick={(e) => {handleDelete(props.id)}} />
     </div>
   )

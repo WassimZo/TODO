@@ -60,6 +60,7 @@ export default function Register() {
 					name="confirm-pwd"
 					id="confirm-pwd"
 					ref={addinputs}
+					autocomplete="off"
 				/>
 				<span>{validation || serverValidation}</span>
 				<span>

@@ -91,6 +91,16 @@ export function UserContextProvider(props) {
 			console.log(err);
 		})
 	}
+
+	const toggleTaskStatus = (task_id) => {
+		client.post('/toggle', {
+			id: task_id,
+		}).then((res) => {
+			loadTasks();
+		}).catch((err) => {
+			console.log(err);
+		})
+	}
  
 	const logout = () => {
 		client.post("/logout").then((res) => {
@@ -109,7 +119,7 @@ export function UserContextProvider(props) {
 		<UserContext.Provider
 			value={{ signUp, currentUser, signIn, logout,
 				 username, loadTasks, tasks, serverValidation,
-				  addTask, removeTask }}
+				  addTask, removeTask, toggleTaskStatus }}
 		>
 			{props.children}
 		</UserContext.Provider>

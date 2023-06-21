@@ -100,3 +100,19 @@ class removeTask(APIView):
         if delete_task:
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class toggleDone(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication, )
+
+    def post(self, request):
+        id = request.data['id']
+        user = request.user
+        task = Tasks.objects.get(id=id, username=user)
+        if(task.done):
+            task.done = False
+            task.save()
+        else:
+            task.done = True
+            task.save()
+        return Response(status=status.HTTP_200_OK)
